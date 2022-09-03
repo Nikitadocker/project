@@ -20,12 +20,12 @@ resource "yandex_kubernetes_cluster" "study-cluster" {
  network_id = yandex_vpc_network.study.id
  master {
    zonal {
-     zone      = yandex_vpc_subnet.ru-central1-b.zone
+     zone      = yandex_vpc_subnet.study-subnet.zone
      subnet_id = yandex_vpc_subnet.study-subnet.id
    }
  }
  service_account_id      = yandex_iam_service_account.study-sa.id
- node_service_account_id = yandex_iam_service_account.study-node.id
+ node_service_account_id = yandex_iam_service_account.study-sa.id
    depends_on = [
      yandex_resourcemanager_folder_iam_binding.editor,
      yandex_resourcemanager_folder_iam_binding.images-puller
