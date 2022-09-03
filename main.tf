@@ -35,7 +35,7 @@ resource "yandex_kubernetes_cluster" "study-cluster" {
 resource "yandex_vpc_network" "study" { name = "study" }
 
 resource "yandex_vpc_subnet" "study-subnet" {
- v4_cidr_blocks = ["10.112.0.0/16"]
+ v4_cidr_blocks = ["10.5.0.0/24"]
  zone           = "ru-central1-b"
  network_id     = yandex_vpc_network.study.id
 }
