@@ -17,7 +17,9 @@ provider "yandex" {
 
 
 resource "yandex_kubernetes_cluster" "study-cluster" {
- network_id = yandex_vpc_network.study.id
+ name        = "study-cluster"
+ description = "study-cluster for project"
+ network_id  = yandex_vpc_network.study.id
  master {
    zonal {
      zone      = yandex_vpc_subnet.study-subnet.zone
@@ -62,3 +64,14 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
    "serviceAccount:${yandex_iam_service_account.study-sa.id}"
  ]
 }
+
+
+# yandex_kubernetes_node_group
+
+
+/*resource "yandex_kubernetes_node_group" "k8s_node_group" {
+  cluster_id  = yandex_kubernetes_cluster.study-cluster.id
+  name        = "worker"
+  description = "worker node"
+  version     = "1.21"
+}*/
