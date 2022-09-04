@@ -20,10 +20,15 @@ resource "yandex_kubernetes_cluster" "study-cluster" {
  name        = "study-cluster"
  description = "study-cluster for project"
  network_id  = yandex_vpc_network.study.id
+
+
  master {
    zonal {
      zone      = yandex_vpc_subnet.study-subnet.zone
      subnet_id = yandex_vpc_subnet.study-subnet.id
+   }
+   maintenance_policy {
+     auto_upgrade = false
    }
  }
  service_account_id      = yandex_iam_service_account.study-sa.id
@@ -32,7 +37,11 @@ resource "yandex_kubernetes_cluster" "study-cluster" {
      yandex_resourcemanager_folder_iam_binding.editor,
      yandex_resourcemanager_folder_iam_binding.images-puller
    ]
+
+ 
 }
+
+
 
 resource "yandex_vpc_network" "study" { name = "study" }
 
@@ -74,4 +83,32 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   name        = "worker"
   description = "worker node"
   version     = "1.21"
+
+  labels = {
+    "node_role" = "worker"
+  }
+
+  instance_template {
+    platform_id = "standard-v3"
+
+    network_interface {
+      nat        = true
+      subnet_ids = [yandex_vpc_subnet.study-subnet.id]
+    }
+
+    resource {
+      memory        = 5
+      cores         = 2
+      core_fraction = 20
+
+    }
+
+    boot_disk {
+      type = "network-hdd"
+      size = 64
+    }
+
+  
+
+  }
 }*/
