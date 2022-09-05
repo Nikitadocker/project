@@ -77,8 +77,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
 
 # yandex_kubernetes_node_group
 
-
-/*resource "yandex_kubernetes_node_group" "k8s_node_group" {
+resource "yandex_kubernetes_node_group" "k8s_node_group" {
   cluster_id  = yandex_kubernetes_cluster.study-cluster.id
   name        = "worker"
   description = "worker node"
@@ -96,7 +95,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
       subnet_ids = [yandex_vpc_subnet.study-subnet.id]
     }
 
-    resource {
+    resources {
       memory        = 5
       cores         = 2
       core_fraction = 20
@@ -108,7 +107,31 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
       size = 64
     }
 
+    scheduling_policy {
+      preemptible = false
+    }
+
+    container_runtime {
+      type = "docker"
+    }
+  }
+  
+  scale_policy {
+    fixed_scale {
+      size = 1
+    }
+  }
+
+  allocation_policy {
+    location {
+      zone = "ru-central1-b"
+    }
+  }
   
 
+  maintenance_policy {
+    auto_upgrade = false
+    auto_repair  = false
   }
-}*/
+    
+}
