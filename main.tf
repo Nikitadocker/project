@@ -27,6 +27,8 @@ resource "yandex_kubernetes_cluster" "study-cluster" {
      zone      = yandex_vpc_subnet.study-subnet.zone
      subnet_id = yandex_vpc_subnet.study-subnet.id
    }
+
+   public_ip = true
    maintenance_policy {
      auto_upgrade = false
    }
