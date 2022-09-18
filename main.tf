@@ -118,10 +118,8 @@ resource "yandex_kubernetes_node_group" "k8s_node_group" {
     }
 
     metadata = {
-      ssh_keys= <<EOF
-      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDLjbzJP20+l30Vh/JWobgK4AIPaJ0JLMNWIldqc1JjhxVBlBdoXSl9YRFaC744XqTV0HswCoiq0lIAfndTi3MvP1p1uepcQLCh0dntdUktKJOIIKU4EFbZBS2kRKVqy+SqDAL2t6kwCHJ2eD15K731dTEW7zZLtAOR8n1B9EypSgqgRiRYcAzBqYSMtsNG++hseWND19rFQJ3oI0e6c5w8pdJgXqSy0m/kVaB1skzQUA8RhywVmj8+m4xViHgMs45sLxlzEH4J93ZVwjN6CHjIKaT2CJ6moCitHfCgOxDRnt56v4i+zuLK6h6SSmhR7Wpk3pCRArXVvh1lTOf9uxJBpS8ITfK7MHNPEYpy7Wg8qzjQjT4SqlMHfl7lTCWvl4/ewPcseouQzMJHcxy6hOqORovqbO9fD1Zu4+2Aq5SLTXEpYbnQm2xhTO27ilMlGNhWr0KzSUMGMjwGyCgc3tnTcweCeT/bT5BihbYjxSigmhOUgEMEaGpB4NnSh+LAR+cuCVnZbTkyjOfKdPnkjLKrQWuSCCcS1dmxP2OQ4JWWKRmlRcYa+kGvdt9xI+2PwQxv3fBkZvRuAZDrHJkMJTD3FVqJ+i+pLAkQgla82crVQ75AWE7WqcFeTFRNBsWNuaJqj1WVBNCNf+syZfv5cJceniEZVpolyvqUGNBAcwY9sQ==
-      EOF
-      
+      ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+            
     }   
  }
     
