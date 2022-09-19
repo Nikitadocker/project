@@ -12,5 +12,5 @@ resource "helm_release" "nginx_ingress" {
   chart      = "ingress-nginx"
   namespace  = "nginx-ingress"
   create_namespace = "true"
-  version = "4.2.5"
+  version = var.chart_version
 }
