@@ -14,3 +14,17 @@ resource "helm_release" "nginx_ingress" {
   create_namespace = "true"
   version = var.chart_version
 }
+
+resource "helm_release" "jira_server" {
+  name       = "jira"
+  repository = "https://helm.mox.sh"
+  chart      = "jira-software"
+  namespace  = "jira"
+  create_namespace = "true"
+  version = var.chart_version_jira
+
+  values = [
+    "${file("values.yaml")}"
+  ]
+
+}
