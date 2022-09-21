@@ -91,7 +91,7 @@ ingress:
     kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: jira-server.84.252.142.15.nip.io
+    - host: jira-server.84.201.153.80.nip.io
       paths:
         - /
   tls: false
